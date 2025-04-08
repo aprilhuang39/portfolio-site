@@ -60,7 +60,7 @@ label {
   grid-column: 1 / -1;
 }
 
-input, textarea {
+input, textarea, button {
   font: inherit;
 }
 
