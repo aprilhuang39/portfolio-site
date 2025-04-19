@@ -12,9 +12,23 @@ html {
   margin-top: 2rem;
 }
 
+.home h1 {
+  text-align: center;
+  font-size: 400%;
+  margin-bottom: 1rem;
+}
+
 .home p {
   max-width: 60ch;
   margin-inline: auto;
+  text-align: center;
+}
+
+.home .profile {
+  display: block;
+  margin: 0 auto 2rem auto;
+  max-width: 100%;
+  height: auto;
 }
 
 body {
