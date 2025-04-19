@@ -4,36 +4,47 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
-const BASE_URL = '/portfolio-site/';
-
-let pages = [
-  { url: BASE_URL, title: 'Home'},
-  { url: BASE_URL + 'projects/', title: 'Projects'},
-  { url: BASE_URL + 'cv/', title: 'Resume'},
-  { url: BASE_URL + 'contact/', title: 'Contact'},
-  { url: 'https://github.com/aprilhuang39/', title: 'GitHub' }
+const pages = [
+  { url: '', title: 'Home' },
+  { url: 'projects/', title: 'Projects' },
+  { url: 'contact/', title: 'Contact' },
+  { url: 'cv/', title: 'CV' },
+  { url: 'https://github.com/aprilhuang39', title: 'GitHub' }
 ];
+
+const IS_GITHUB_PAGES = location.hostname === 'aprilhuang39.github.io'; 
+const BASE_PATH = IS_GITHUB_PAGES ? '/portfolio-site' : ''; 
+const ARE_WE_HOME = document.documentElement.classList.contains('home');
 
 let nav = document.createElement('nav');
 document.body.prepend(nav);
 
 for (let p of pages) {
+  let url = p.url;
+  let title = p.title;
+
+  url = !ARE_WE_HOME && !url.startsWith('http') ? BASE_PATH + '/' + url : url;
+
   let a = document.createElement('a');
-  a.href = p.url;
-  a.textContent = p.title;
-  
-  // Mark current page
-  if (location.pathname.endsWith(p.url)) {
+  a.href = url;
+  a.textContent = title;
+
+  const currentPath = location.pathname.endsWith('/')
+    ? location.pathname
+    : location.pathname + '/';
+  if (a.host === location.host && a.pathname === location.pathname) {
     a.classList.add('current');
   }
-  
-  // Open external links in new tab
-  if (!p.url.startsWith(BASE_URL) && p.url.includes('://')) {
+
+  if (p.url.startsWith('http')) {
     a.target = '_blank';
+    a.rel = 'noopener noreferrer'; 
   }
-  
+
   nav.append(a);
 }
+
+
 
 document.body.insertAdjacentHTML(
     'afterbegin',
