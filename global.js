@@ -4,12 +4,14 @@ function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
 }
 
+const BASE_URL = '/portfolio-site/';
+
 let pages = [
-    { url: '', title: 'Home'},
-    { url: 'portfolio-site/projects/', title: 'Projects'},
-    { url: 'portfolio-site/cv/', title: 'Resume'},
-    { url: 'portfolio-site/contact/', title: 'Contact'},
-    { url: 'https://github.com/aprilhuang39/', title: 'GitHub' }
+  { url: BASE_URL, title: 'Home'},
+  { url: BASE_URL + 'projects/', title: 'Projects'},
+  { url: BASE_URL + 'cv/', title: 'Resume'},
+  { url: BASE_URL + 'contact/', title: 'Contact'},
+  { url: 'https://github.com/aprilhuang39/', title: 'GitHub' }
 ];
 
 let nav = document.createElement('nav');

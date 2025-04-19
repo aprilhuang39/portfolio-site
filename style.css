@@ -2,6 +2,21 @@ html {
   --color-accent: oklch(65% 50% 0);
 }
 
+.home .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  min-height: 70vh;
+  margin-top: 2rem;
+}
+
+.home p {
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
 body {
   max-width: 100ch;
   line-height: 1.5;
