@@ -119,10 +119,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Hover effect for links */
-.resume a:hover {
-  color: var(--color-accent); /* Changes color to accent color when hovered */
-  border-bottom: 1px solid var(--color-accent); /* Adds an underline on hover */
-}
+/* .resume a:hover {
+  color: var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+}*/
 
 .resume section ul {
   margin: 0;
