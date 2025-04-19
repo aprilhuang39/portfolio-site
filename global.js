@@ -18,25 +18,22 @@ let nav = document.createElement('nav');
 document.body.prepend(nav);
 
 for (let p of pages) {
-    const at_home = document.documentElement.classList.contains('home');
-    let url = p.url;    
-    if (!at_home && !url.startsWith('http')) {
-        url = '../' + url;
-    }
-    let title = p.title;
-    
-    let a = document.createElement('a');
-    a.href = url;
-    a.textContent = title;
-    if (a.host === location.host && a.pathname === location.pathname) {
-        a.classList.add('current');
-    }
-    if (a.host !== location.host) {
-        a.target = '_blank';
-    }
-    nav.append(a);
-}  
-
+  let a = document.createElement('a');
+  a.href = p.url;
+  a.textContent = p.title;
+  
+  // Mark current page
+  if (location.pathname.endsWith(p.url)) {
+    a.classList.add('current');
+  }
+  
+  // Open external links in new tab
+  if (!p.url.startsWith(BASE_URL) && p.url.includes('://')) {
+    a.target = '_blank';
+  }
+  
+  nav.append(a);
+}
 
 document.body.insertAdjacentHTML(
     'afterbegin',
