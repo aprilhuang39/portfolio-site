@@ -7,8 +7,8 @@ function $$(selector, context = document) {
 const pages = [
   { url: '', title: 'Home' },
   { url: 'projects/', title: 'Projects' },
+  { url: 'cv/', title: 'Resume' },
   { url: 'contact/', title: 'Contact' },
-  { url: 'cv/', title: 'CV' },
   { url: 'https://github.com/aprilhuang39', title: 'GitHub' }
 ];
 
