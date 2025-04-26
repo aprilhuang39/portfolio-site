@@ -1,4 +1,4 @@
-console.log('IT’S ALIVE!');
+console.log("IT'S ALIVE!");
 
 function $$(selector, context = document) {
   return Array.from(context.querySelectorAll(selector));
@@ -72,3 +72,47 @@ select.addEventListener('input', function (event) {
     document.documentElement.style.setProperty('color-scheme', scheme);
     localStorage.colorScheme = scheme;
 });
+
+export async function fetchJSON(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching or parsing JSON data:', error);
+  }
+}
+
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  containerElement.innerHTML = '';
+  
+  // Update the title with project count
+  const titleElement = document.querySelector('.projects-title');
+  if (titleElement) {
+    titleElement.textContent = `Projects (${projects.length})`;
+  }
+  
+  projects.forEach(project => {
+    const article = document.createElement('article');
+    
+    const title = document.createElement(headingLevel);
+    title.textContent = project.title;
+    
+    const image = document.createElement('img');
+    image.src = project.image;
+    image.alt = project.title;
+    
+    const description = document.createElement('p');
+    description.textContent = project.description;
+    
+    article.append(title, image, description);
+    containerElement.append(article);
+  });
+}
+
+export async function fetchGitHubData(username) {
+  return fetchJSON(`https://api.github.com/users/${username}`);
+}
