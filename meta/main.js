@@ -101,15 +101,26 @@ async function loadData() {
         d3.hcl(60, 70, 50)    // Day (orange)
       ));
 
+    // Create radius scale based on number of edited lines
+    const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+    const rScale = d3.scaleLinear()
+        .scaleSqrt()
+        .domain([minLines, maxLines])
+        .range([3, 15])  // Using more conservative values for better visibility
+        .clamp(true);    // Ensure values stay within range
+
     const dots = svg.append('g').attr('class', 'dots');
+
+    const sortedCommits = d3.sort(commits, (d) => -d.totalLines);
     
     dots
         .selectAll('circle')
+        .data(sortedCommits)
         .data(commits)
         .join('circle')
         .attr('cx', (d) => xScale(d.datetime))
         .attr('cy', (d) => yScale(d.hourFrac))
-        .attr('r', 5)
+        .attr('r', (d) => rScale(d.totalLines))
         .attr('fill', 'steelblue')
         .on('mouseenter', (event, commit) => {
             renderTooltipContent(commit);
