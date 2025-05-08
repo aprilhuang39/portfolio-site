@@ -9,6 +9,7 @@ const pages = [
   { url: 'projects/', title: 'Projects' },
   { url: 'cv/', title: 'Resume' },
   { url: 'contact/', title: 'Contact' },
+  { url: 'meta/', title: 'Meta'},
   { url: 'https://github.com/aprilhuang39', title: 'GitHub' }
 ];
 

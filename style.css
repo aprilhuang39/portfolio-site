@@ -239,3 +239,107 @@ path {
     fill: var(--color);
   }
 }
+
+.stats {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background-color: color-mix(in oklch, var(--color-accent), canvas 95%);
+}
+
+.stats dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.stats dt {
+  font-weight: bold;
+  color: var(--color-accent);
+  margin-bottom: 0.25rem;
+}
+
+.stats dd {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.gridlines line {
+  stroke: oklch(90% 3% 200);
+  stroke-width: 0.5;
+  stroke-dasharray: 2,2;
+}
+
+.gridlines path {
+  display: none;
+}
+
+.tooltip {
+  position: fixed;
+  display: none;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.tooltip dl {
+  margin: 0;
+}
+
+.tooltip dt {
+  color: oklch(60% 3% 200);
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.tooltip dd {
+  margin: 0 0 0.5em 0;
+  font-weight: 500;
+}
+
+.tooltip dd:last-child {
+  margin-bottom: 0;
+}
+
+dl.info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5em 1em;
+  margin: 0;
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+
+dl.info dt {
+  color: oklch(60% 3% 200);
+  font-size: 0.9em;
+  margin: 0;
+}
+
+dl.info dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
