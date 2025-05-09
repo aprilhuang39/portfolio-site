@@ -1,5 +1,8 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
+let xScale;
+let yScale;
+
 async function loadData() {
     const data = await d3.csv('loc.csv', (row) => ({
       ...row,
@@ -79,24 +82,40 @@ async function loadData() {
     const height = 600;
     // Create radius scale based on number of edited lines
     const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
-    const rScale = d3.scaleLinear()
-        .scaleSqrt()
+    const rScale = d3
+        .scaleSqrt()  // Note: Fixed the scale, removed extra .scaleLinear()
         .domain([minLines, maxLines])
         .range([3, 15])  // Using more conservative values for better visibility
         .clamp(true);    // Ensure values stay within range
+
     const svg = d3
         .select('#chart')
         .append('svg')
         .attr('viewBox', `0 0 ${width} ${height}`)
         .style('overflow', 'visible');
 
-    const xScale = d3
+    // Create scales with padding to keep points within bounds
+    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const usableArea = {
+        top: margin.top,
+        right: width - margin.right,
+        bottom: height - margin.bottom,
+        left: margin.left,
+        width: width - margin.left - margin.right,
+        height: height - margin.top - margin.bottom,
+    };
+
+    xScale = d3
         .scaleTime()
         .domain(d3.extent(commits, (d) => d.datetime))
-        .range([0, width])
+        .range([usableArea.left, usableArea.right])
         .nice();
     
-    const yScale = d3.scaleLinear().domain([0, 24]).range([height, 0]);
+    yScale = d3
+        .scaleLinear()
+        .domain([0, 24])
+        .range([usableArea.bottom, usableArea.top])
+        .nice();
 
     const dots = svg.append('g').attr('class', 'dots');
 
@@ -109,33 +128,20 @@ async function loadData() {
         .attr('cx', (d) => xScale(d.datetime))
         .attr('cy', (d) => yScale(d.hourFrac))
         .attr('r', (d) => rScale(d.totalLines))
-        .attr('fill', 'steelblue')
+        .style('fill', 'var(--color-accent)')  // Use the accent color
+        .style('fill-opacity', 0.7)  // Added transparency for better visibility
         .on('mouseenter', (event, commit) => {
+            d3.select(event.currentTarget).style('fill-opacity', 1);  // Highlight on hover
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
             updateTooltipPosition(event);
         })
-        .on('mouseleave', () => {
+        .on('mouseleave', (event) => {
+            d3.select(event.currentTarget).style('fill-opacity', 0.7);
             updateTooltipVisibility(false);
-    });
+        });
 
-    const margin = { top: 10, right: 10, bottom: 30, left: 20 };
-
-    const usableArea = {
-        top: margin.top,
-        right: width - margin.right,
-        bottom: height - margin.bottom,
-        left: margin.left,
-        width: width - margin.left - margin.right,
-        height: height - margin.top - margin.bottom,
-      };
-      
-      // Update scales with new ranges
-      xScale.range([usableArea.left, usableArea.right]);
-      yScale.range([usableArea.bottom, usableArea.top]);
-
-
-    // Add gridlines BEFORE the axes
+    // Add gridlines
     const gridlines = svg
         .append('g')
         .attr('class', 'gridlines')
@@ -163,7 +169,7 @@ async function loadData() {
         .call(yAxis);
 
     createBrushSelector(svg);
-   }
+  }
    
    let data = await loadData();
    let commits = processCommits(data);

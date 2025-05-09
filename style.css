@@ -291,26 +291,11 @@ path {
   display: none;
 }
 
-#commit-tooltip {
-  position: fixed;
-  top: 1em;
-  left: 1em;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1em;
-  border-radius: 0.5em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  pointer-events: none;
-  z-index: 1000;
-  min-width: 200px;
-}
-
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5em 1em;
-  margin: 0;
+  align-items: start;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
 }
@@ -323,12 +308,12 @@ dl.info[hidden]:not(:hover, :focus-within) {
 dl.info dt {
   color: oklch(60% 3% 200);
   font-size: 0.9em;
-  margin: 0;
+  text-transform: uppercase;
 }
 
 dl.info dd {
   margin: 0;
-  font-weight: 500;
+  font-weight: normal;
 }
 
 circle {
@@ -374,15 +359,4 @@ circle.selected {
 #language-breakdown dd {
   font-size: 1.2em;
   grid-row: 2; /* Ensures all dd elements stay in the second row */
-}
-
-#chart {
-  width: 100%;
-  height: 600px;
-  margin: 2em 0;
-}
-
-#chart svg {
-  width: 100%;
-  height: 100%;
 }
