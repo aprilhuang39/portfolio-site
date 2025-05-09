@@ -2,23 +2,25 @@ import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
 let xScale;
 let yScale;
+let data;
+let commits;
 
 async function loadData() {
-    const data = await d3.csv('loc.csv', (row) => ({
+    const loadedData = await d3.csv('loc.csv', (row) => ({
       ...row,
-      line: Number(row.line), // or just +row.line
+      line: Number(row.line),
       depth: Number(row.depth),
       length: Number(row.length),
       date: new Date(row.date + 'T00:00' + row.timezone),
       datetime: new Date(row.datetime),
     }));
   
-    return data;
+    return loadedData;
   }
 
-  function processCommits(data) {
+  function processCommits(inputData) {
     return d3
-      .groups(data, (d) => d.commit)
+      .groups(inputData, (d) => d.commit)
       .map(([commit, lines]) => {
         let first = lines[0];
         let { author, date, time, timezone, datetime } = first;
@@ -36,9 +38,9 @@ async function loadData() {
   
         Object.defineProperty(ret, 'lines', {
           value: lines,
-          configurable: false,  // Cannot be redefined
-          writable: false,      // Cannot be modified
-          enumerable: false     // Hidden from enumeration
+          configurable: false,
+          writable: false,
+          enumerable: false
         });
   
         return ret;
@@ -83,10 +85,10 @@ async function loadData() {
     // Create radius scale based on number of edited lines
     const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
     const rScale = d3
-        .scaleSqrt()  // Note: Fixed the scale, removed extra .scaleLinear()
+        .scaleSqrt()
         .domain([minLines, maxLines])
-        .range([3, 15])  // Using more conservative values for better visibility
-        .clamp(true);    // Ensure values stay within range
+        .range([3, 15])
+        .clamp(true);
 
     const svg = d3
         .select('#chart')
@@ -128,10 +130,10 @@ async function loadData() {
         .attr('cx', (d) => xScale(d.datetime))
         .attr('cy', (d) => yScale(d.hourFrac))
         .attr('r', (d) => rScale(d.totalLines))
-        .style('fill', 'var(--color-accent)')  // Use the accent color
-        .style('fill-opacity', 0.7)  // Added transparency for better visibility
+        .style('fill', 'var(--color-accent)')
+        .style('fill-opacity', 0.7)
         .on('mouseenter', (event, commit) => {
-            d3.select(event.currentTarget).style('fill-opacity', 1);  // Highlight on hover
+            d3.select(event.currentTarget).style('fill-opacity', 1);
             renderTooltipContent(commit);
             updateTooltipVisibility(true);
             updateTooltipPosition(event);
@@ -171,8 +173,9 @@ async function loadData() {
     createBrushSelector(svg);
   }
    
-   let data = await loadData();
-   let commits = processCommits(data);
+   // Initialize global data and commits variables
+   data = await loadData();
+   commits = processCommits(data);
    renderCommitInfo(data, commits);
    renderScatterPlot(data, commits);
 
