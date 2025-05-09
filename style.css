@@ -240,30 +240,45 @@ path {
   }
 }
 
-.stats {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  background-color: color-mix(in oklch, var(--color-accent), canvas 95%);
+/* meta stats */
+
+#stats {
+  width: 100%;
+  max-width: none;
+  margin: 2em 0;
+  text-align: left;
+  padding: 0;
 }
 
-.stats dl {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 0;
-}
-
-.stats dt {
+#stats h2 {
+  font-size: 1.8em;
   font-weight: bold;
-  color: var(--color-accent);
-  margin-bottom: 0.25rem;
+  margin-bottom: 1em;
+  text-align: left;
 }
 
-.stats dd {
+#stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: left;
+  gap: 0.5em 1em;
+  width: 100%;
+}
+
+#stats dt {
+  font-weight: bold;
+  font-size: 0.9em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  grid-row: 1;
+  text-align: left;
+}
+
+#stats dd {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 2em;
+  grid-row: 2;
+  text-align: left;
 }
 
 .gridlines line {
@@ -276,9 +291,10 @@ path {
   display: none;
 }
 
-.tooltip {
+#commit-tooltip {
   position: fixed;
-  display: none;
+  top: 1em;
+  left: 1em;
   background: rgba(255, 255, 255, 0.95);
   padding: 1em;
   border-radius: 0.5em;
@@ -290,25 +306,6 @@ path {
   min-width: 200px;
 }
 
-.tooltip dl {
-  margin: 0;
-}
-
-.tooltip dt {
-  color: oklch(60% 3% 200);
-  font-size: 0.9em;
-  margin: 0;
-}
-
-.tooltip dd {
-  margin: 0 0 0.5em 0;
-  font-weight: 500;
-}
-
-.tooltip dd:last-child {
-  margin-bottom: 0;
-}
-
 dl.info {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -316,6 +313,11 @@ dl.info {
   margin: 0;
   transition-duration: 500ms;
   transition-property: opacity, visibility;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
 }
 
 dl.info dt {
@@ -329,11 +331,6 @@ dl.info dd {
   font-weight: 500;
 }
 
-dl.info[hidden]:not(:hover, :focus-within) {
-  opacity: 0;
-  visibility: hidden;
-}
-
 circle {
   transition: 200ms;
   transform-origin: center;
@@ -342,4 +339,50 @@ circle {
 
 circle:hover {
   transform: scale(1.5);
+}
+
+#commit-tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle elevation effect */
+  border-radius: 8px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  padding: 10px; /* Spacing inside the tooltip */
+  font-size: 14px;
+  color: black;
+}
+
+circle.selected {
+  fill: #ff6b6b;
+}
+
+#language-breakdown {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
+  gap: 0.5em;
+  text-align: center;
+}
+
+#language-breakdown dt {
+  font-size: 1.2em;
+  grid-row: 1; /* Ensures all dt elements stay in the first row */
+}
+
+#language-breakdown dd {
+  font-size: 1.2em;
+  grid-row: 2; /* Ensures all dd elements stay in the second row */
+}
+
+#chart {
+  width: 100%;
+  height: 600px;
+  margin: 2em 0;
+}
+
+#chart svg {
+  width: 100%;
+  height: 100%;
 }
