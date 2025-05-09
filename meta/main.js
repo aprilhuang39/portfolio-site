@@ -74,9 +74,9 @@ async function loadData() {
     dl.append('dt').text('Longest file');
     dl.append('dd').text(longestFile);
 
-    // Add average depth
-    dl.append('dt').text('Average depth');
-    dl.append('dd').text(d3.mean(data, d => d.depth).toFixed(1));
+    // Add average line length
+    dl.append('dt').text('Average line length');
+    dl.append('dd').text(d3.mean(data, d => d.length).toFixed(1));
   }
 
   function renderScatterPlot(data, commits) {
