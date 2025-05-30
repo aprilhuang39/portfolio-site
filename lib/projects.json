@@ -19,6 +19,13 @@
         "description": "Developed a web application portal for Triton Consulting Group to streamline their application process, allowing users to apply and admin to control and track applications"
     },
     {
+        "title": "Bikewatching Visualization",
+        "year": "2025",
+        "image": "./images/bikewatching.png",
+        "description": "Developed a visualization of bikewatching data using D3.js, allowing users to explore and analyze bikewatching patterns across Boston and during different times of day.",
+        "link": "https://aprilhuang39.github.io/bikewatching/"
+    },
+    {
         "title": "Recipe Analysis Model",
         "year": "2024",
         "image": "./images/recipe.png",
@@ -36,11 +43,6 @@
         "year": "2023",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Developed a recommender system to suggest songs based on similarities in audio features to a user's favorite song from Spotify's billion streams club"
-    },
-    {
-        "title": "Iusto quas dicta impedit.",
-        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
-        "description": "\n                \n            "
     },
     {
         "title": "At placeat fugiat quibusdam!",
