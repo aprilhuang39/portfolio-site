@@ -96,6 +96,9 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     titleElement.textContent = `Projects (${projects.length})`;
   }
   
+  // Determine if we're on the projects page
+  const isProjectsPage = window.location.pathname.includes('/projects/');
+  
   projects.forEach(project => {
     const article = document.createElement('article');
     
@@ -111,7 +114,8 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     }
     
     const image = document.createElement('img');
-    image.src = project.image;
+    // Adjust image path based on current page
+    image.src = isProjectsPage ? project.image.replace('./', '../') : project.image;
     image.alt = project.title;
     
     const description = document.createElement('p');
