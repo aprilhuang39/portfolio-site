@@ -2,26 +2,26 @@
     {
         "title": "Data Science Student Society Website",
         "year": "2025",
-        "image": "../images/ds3.png",
+        "image": "./images/ds3.png",
         "description": "Redesigned the DS3 website using Svelte and JavaScript/TypeScript, adding dynamic features and improving performance on mobile for 100+ users",
         "link": "https://ds3.ucsd.edu"
     },
     {
         "title": "Anomaly Detection & Time Series Forecasting for OutOfTheBlue.ai",
         "year": "2025",
-        "image": "../images/otb.png",
+        "image": "./images/otb.png",
         "description": "Utilized Facebook Prophet, DBSCAN, and high-performance data wrangling with Polars and Pandas to forecast demand, detect anomalies, and analyze large-scale ecommerce data across product categories, regions, and time granularities."
     },
     {
         "title": "Triton Consulting Group Application Portal",
         "year": "2025",
-        "image": "../images/tcg.png",
+        "image": "./images/tcg.png",
         "description": "Developed a web application portal for Triton Consulting Group to streamline their application process, allowing users to apply and admin to control and track applications"
     },
     {
         "title": "Recipe Analysis Model",
         "year": "2024",
-        "image": "../images/recipe.png",
+        "image": "./images/recipe.png",
         "description": "Designed and developed a machine learning pipeline leveraging pandas and scikit-learn to predict recipe preparation times, utilizing a dataset of 80,000+ recipes and 700,000+ user reviews from Food.com.",
         "link": "https://github.com/aprilhuang39/recipe-analysis"
     },
