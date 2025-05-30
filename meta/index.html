@@ -14,7 +14,14 @@
     <div id="stats"></div>
 
     <h2>Commits by time of day</h2>
-    <div id="chart"></div>
+    <div id="scrollytelling">
+        <div id="scroll-container">
+            <div id="spacer"></div>
+            <div id="items-container"></div>
+        </div>
+        <div id="chart"></div>
+    </div>
+
     <dl id="commit-tooltip" class="info tooltip" hidden>
         <dt>Commit</dt>
         <dd>
@@ -30,7 +37,26 @@
         <dd id="commit-lines"></dd>
     </dl>
 
+    <dl class="files">
+        <div>
+            <dt><code>{file.name}</code></dt>
+            <dd>{file.lines.length} lines</dd>
+        </div>
+        <div>...</div>
+    </dl>
+
+    <div id="scrollytelling-2">
+        <!-- Left: scrollable narrative items (sorted by longestLine) -->
+        <div id="scroll-container-2">
+        <div id="spacer-2"></div>
+        <div id="items-container-2"></div>
+        </div>
+        <!-- Right: Unit visualization for longestLine -->
+        <div id="files-longest" class="files"></div>
+    </div>
+    
     <p id="selection-count">No commits selected</p>
     <dl id="language-breakdown" class="stats"></dl>
+
 </body>
 </html>
