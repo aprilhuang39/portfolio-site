@@ -4,7 +4,7 @@
         "year": "2025",
         "image": "./images/ds3.png",
         "description": "Redesigned the DS3 website using Svelte and JavaScript/TypeScript, adding dynamic features and improving performance on mobile for 100+ users",
-        "link": "https://ds3.ucsd.edu"
+        "link": "https://ds3ucsd.com"
     },
     {
         "title": "Anomaly Detection & Time Series Forecasting for OutOfTheBlue.ai",
@@ -23,7 +23,7 @@
         "year": "2024",
         "image": "./images/recipe.png",
         "description": "Designed and developed a machine learning pipeline leveraging pandas and scikit-learn to predict recipe preparation times, utilizing a dataset of 80,000+ recipes and 700,000+ user reviews from Food.com.",
-        "link": "https://github.com/aprilhuang39/recipe-analysis"
+        "link": "https://aprilhuang39.github.io/recipe-analysis/"
     },
     {
         "title": "Image Processing and Classification App",
