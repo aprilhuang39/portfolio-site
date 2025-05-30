@@ -102,6 +102,11 @@ article img {
   border-radius: 8px;  /* Optional: adds rounded corners */
 }
 
+article a {
+  color: inherit;  /* Use the same color as the surrounding text */
+  text-decoration: none;  /* Remove underline */
+}
+
 h2 {
   margin: 0;
 }
