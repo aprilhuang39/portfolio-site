@@ -72,6 +72,13 @@ select.addEventListener('input', function (event) {
     let scheme = event.target.value;
     document.documentElement.style.setProperty('color-scheme', scheme);
     localStorage.colorScheme = scheme;
+    
+    // Force image refresh when color scheme changes
+    document.querySelectorAll('article img').forEach(img => {
+        const currentSrc = img.src;
+        img.src = '';  // Clear the source
+        img.src = currentSrc;  // Reset the source to trigger refresh
+    });
 });
 
 export async function fetchJSON(url) {
