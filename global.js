@@ -100,7 +100,15 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     const article = document.createElement('article');
     
     const title = document.createElement(headingLevel);
-    title.textContent = project.title;
+    if (project.link) {
+      const link = document.createElement('a');
+      link.href = project.link;
+      link.textContent = project.title;
+      link.target = '_blank';  // Open in new tab
+      title.appendChild(link);
+    } else {
+      title.textContent = project.title;
+    }
     
     const image = document.createElement('img');
     image.src = project.image;
